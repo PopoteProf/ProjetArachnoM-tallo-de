@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c863873ceb041fd9f7a6cd7e82b8174, type: 3}
+  m_Name: SoTileCollection
+  m_EditorClassIdentifier: Assembly-CSharp::SoTilesCollection
+  _tiles:
+  - {fileID: -387386274241317372, guid: 3e097444aeeee984e875d7a5a2341082, type: 3}
+  - {fileID: 5794128767537036557, guid: 209bc72b4c445f8418a37da519995954, type: 3}
+  - {fileID: -457094679076076417, guid: 3cd00b0b6a908c04590f2570f8a90e8e, type: 3}
+  - {fileID: 8080957539745726065, guid: 35c0970eff5e3e14ca38d46b2e10ec63, type: 3}
+  - {fileID: 2481014251415340830, guid: 01b30af1fb40c9d498952168fddf92da, type: 3}
