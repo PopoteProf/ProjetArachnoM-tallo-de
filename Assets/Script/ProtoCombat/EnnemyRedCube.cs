@@ -1,15 +1,22 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
-public class EnnemyRedCube : MonoBehaviour {
+public class EnnemyRedCube : MonoBehaviour, IDamable {
     [SerializeField] private NavMeshAgent _agent;
     [SerializeField] private float _fireRange;
     [SerializeField] private Transform _playerTarget;
     [SerializeField] private LayerMask _fireLayer;
-    [SerializeField] private TagHandle _playerTag;
+    [SerializeField] private string _playerTag;
     [SerializeField] private float _firerate = 2;
-    [SerializeField] private PopoteTimer _fireTimer;
+    [SerializeField] private int _health =4;
+    [Header("Attack")] 
+    [SerializeField] private Transform _firePoint;
+    [SerializeField] private Projectile _prfProjectile;
+    [SerializeField] private SoProjectileData _projectileData;
+    [SerializeField] private float _bulletSpeed =25f;
+    
+    private PopoteTimer _fireTimer;
+    
 
     public void SetUpPlayerTarget(GameObject target) {
         _playerTarget = target.transform;
@@ -36,6 +43,7 @@ public class EnnemyRedCube : MonoBehaviour {
         _fireTimer.UpdateTimer();
         if (CanFire()) {
             _agent.isStopped = true;
+            transform.forward = _playerTarget.position - transform.position;
             ManageFire();
         }
         else {
@@ -46,11 +54,22 @@ public class EnnemyRedCube : MonoBehaviour {
 
     private void ManageFire()
     {
-        
+        if (_fireTimer.IsPlaying) return;
+        Projectile bullet =Instantiate(_prfProjectile,_firePoint.position,_firePoint.rotation);
+        bullet.Setup(_projectileData);
+        bullet.Rigidbody.AddForce(transform.forward * _bulletSpeed,ForceMode.Impulse);
+        _fireTimer.Play();
     }
 
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position ,_fireRange);
+    }
+
+    public void TakeDamage(int damage) {
+        _health -= damage;
+        if (_health <= 0) {
+            Destroy(gameObject);
+        }
     }
 }

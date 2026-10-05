@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class EnnemySpawner : MonoBehaviour {
+public class EnnemySpawner : MonoBehaviour, IDamable {
     [SerializeField] private float _spawningRange = 40;
     [SerializeField] private Vector3 _spawOffSet;
     [SerializeField] private GameObject _playerTarget;
@@ -10,6 +10,7 @@ public class EnnemySpawner : MonoBehaviour {
     [SerializeField] private int _minInicialSpawn =3;
     [SerializeField] private int _maxInicialSpawn =6;
     [SerializeField] private float _inRangeSpawnRate = 0.5f;
+    [SerializeField] private int _hp = 10;
 
     private PopoteTimer _spawnTimer;
     private bool _isPlayerInRange;
@@ -55,5 +56,12 @@ public class EnnemySpawner : MonoBehaviour {
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, _spawningRange);
+    }
+
+    public void TakeDamage(int damage) {
+        _hp -= damage;
+        if (_hp <= 0) {
+            Destroy(gameObject);
+        }
     }
 }

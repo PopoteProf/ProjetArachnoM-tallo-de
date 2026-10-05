@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4214259504410159416}
   - component: {fileID: 4365148556995734876}
   - component: {fileID: 8203780696358186937}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: EnnemiRedCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31,9 +31,10 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.50379, y: 0, z: 18.21441}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1.6, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 5957545005975310740}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4083633707867338544
@@ -153,5 +154,42 @@ MonoBehaviour:
   _playerTarget: {fileID: 0}
   _fireLayer:
     serializedVersion: 2
-    m_Bits: 576
+    m_Bits: 192
+  _playerTag: Player
   _firerate: 2
+  _health: 4
+  _firePoint: {fileID: 5957545005975310740}
+  _prfProjectile: {fileID: 4376754773587571707, guid: b1a0aab7c2fb22f42830cee388c2f4fd, type: 3}
+  _projectileData: {fileID: 11400000, guid: fe27eecf0e2fac74d807fe449390b5f6, type: 2}
+  _bulletSpeed: 25
+--- !u!1 &6206699351775851266
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5957545005975310740}
+  m_Layer: 8
+  m_Name: _FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5957545005975310740
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6206699351775851266}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.366, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 90663728923985717}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

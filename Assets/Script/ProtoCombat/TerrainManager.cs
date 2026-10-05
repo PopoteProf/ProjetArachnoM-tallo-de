@@ -20,10 +20,10 @@ public class TerrainManager : MonoBehaviour
     [SerializeField] private float _aStartHeightMuiltiplier = 1;
     [Header("Tiles")] 
     [SerializeField] private Vector3 TileSize = new Vector3(5, 0, 5);
-    [SerializeField] private TerrainTile _prfNoneTile;
-    [SerializeField] private TerrainTile _prfLeftTile;
-    [SerializeField] private TerrainTile _prfRightTile;
-    [SerializeField] private TerrainTile _prfOpositeTile;
+    //[SerializeField] private TerrainTile _prfNoneTile;
+    //[SerializeField] private TerrainTile _prfLeftTile;
+    //[SerializeField] private TerrainTile _prfRightTile;
+    //[SerializeField] private TerrainTile _prfOpositeTile;
     [SerializeField] private SoTilesCollection _soTilesCollection;
 
     [Header("EnnemiSpawner")] 
@@ -31,6 +31,8 @@ public class TerrainManager : MonoBehaviour
     [SerializeField] private Vector3 _spawnerOffset = new Vector3(0,1,0);
     [SerializeField] private EnnemySpawner _prfspawner;
     [SerializeField] private GameObject _playerController;
+    [Header("EnnemiSpawner")] 
+    [SerializeField] private GameObject _prfEndLevelTrigger;
     private TerrainCell[,] _cells;
     
     private List<TerrainCell> _mainPass;
@@ -62,6 +64,7 @@ public class TerrainManager : MonoBehaviour
         if (_generateTerrainAtSart) {
             CalculatePath();
             SpawnPassTiles();
+            SpawnEndGame();
         }
     }
     private void GenerateCells() {
@@ -228,6 +231,11 @@ public class TerrainManager : MonoBehaviour
     private void SetAllTheNeighborsData() {
         while (_cellConnected.Count > 0) {
             TileConnectionData data =GetTileDataNeeded(_cellConnected[0]);
+            List<ReturnTile> returnTiles = _soTilesCollection.GetPotencialTiles(data);
+            if( returnTiles == null || returnTiles.Count == 0) {
+                _cellConnected.RemoveAt(0);
+                continue;
+            }
             _cellConnected[0].ReturnTile =_soTilesCollection.GetPotencialTiles(data).GetRandomTile();
             
             foreach (var dir in _cellConnected[0].GetCellConnection()) {
@@ -255,21 +263,21 @@ public class TerrainManager : MonoBehaviour
         return TileConnectionData.ConnectionType.None;
     }
 
-    private void SpawnTiles(List<TerrainCell> cells) {
-        foreach (var cell in cells) {
-            Debug.Log(" Spaw Tile At Coordinate"+ cell.Coordinates +" with a direction of "+ cell.Direction+ " ans a Type of "+ cell.TileForme);
-            TerrainTile tileToSpaw = cell.TileForme switch {
-                TerrainTile.TileForme.none => _prfNoneTile,
-                TerrainTile.TileForme.left => _prfLeftTile,
-                TerrainTile.TileForme.right => _prfRightTile,
-                TerrainTile.TileForme.opposite => _prfOpositeTile,
-                _ => throw new ArgumentOutOfRangeException()
-            };
-            Vector3 pos =new Vector3(cell.Coordinates.x*TileSize.x,0,cell.Coordinates.y*TileSize.z); 
-            TerrainTile tile = Instantiate( tileToSpaw, pos, Quaternion.identity);
-            tile.transform.forward = cell.Direction.GetWorldDirection();
-        }
-    }
+    //private void SpawnTiles(List<TerrainCell> cells) {
+    //    foreach (var cell in cells) {
+    //        Debug.Log(" Spaw Tile At Coordinate"+ cell.Coordinates +" with a direction of "+ cell.Direction+ " ans a Type of "+ cell.TileForme);
+    //        TerrainTile tileToSpaw = cell.TileForme switch {
+    //            TerrainTile.TileForme.none => _prfNoneTile,
+    //            TerrainTile.TileForme.left => _prfLeftTile,
+    //            TerrainTile.TileForme.right => _prfRightTile,
+    //            TerrainTile.TileForme.opposite => _prfOpositeTile,
+    //            _ => throw new ArgumentOutOfRangeException()
+    //        };
+    //        Vector3 pos =new Vector3(cell.Coordinates.x*TileSize.x,0,cell.Coordinates.y*TileSize.z); 
+    //        TerrainTile tile = Instantiate( tileToSpaw, pos, Quaternion.identity);
+    //        tile.transform.forward = cell.Direction.GetWorldDirection();
+    //    }
+    //}
 
     private void SpawnTileV2() {
         for (int i = 0; i < _mainPass.Count; i++) {
@@ -372,5 +380,9 @@ public class TerrainManager : MonoBehaviour
 
     private void Update() {
         if (_perlinInUpdate)UpdatePerlinNose();
+    }
+
+    private void SpawnEndGame() {
+       Instantiate(_prfEndLevelTrigger, GetCellWorldPosition(GetCell(_endPos))+_spawnerOffset, Quaternion.identity);
     }
 }

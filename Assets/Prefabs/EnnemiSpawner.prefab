@@ -13,10 +13,11 @@ GameObject:
   - component: {fileID: 2077330170354382639}
   - component: {fileID: 8401992875952039437}
   - component: {fileID: -1945103547668957021}
-  m_Layer: 0
+  - component: {fileID: 5998743235904239013}
+  m_Layer: 8
   m_Name: EnnemiSpawner
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -131,3 +132,25 @@ MonoBehaviour:
   _minInicialSpawn: 3
   _maxInicialSpawn: 6
   _inRangeSpawnRate: 0.5
+  _hp: 10
+--- !u!65 &5998743235904239013
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3311484402769700431}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}

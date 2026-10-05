@@ -2,8 +2,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "SoTilesCollection", menuName = "SO/SoTileCollection")]
-public class SoTilesCollection : ScriptableObject
-{
+public class SoTilesCollection : ScriptableObject {
     [SerializeField]private TerrainTile[] _tiles;
 
     public List<ReturnTile> GetPotencialTiles(TileConnectionData connectionData) {
@@ -14,7 +13,6 @@ public class SoTilesCollection : ScriptableObject
                 TileConnectionData rotatedData = connectionData.Rotate((DirectionType)i);
                 if (tile.DidFeetRequirement(rotatedData))returnTile.Add(new ReturnTile((DirectionType)i, tile));
             }
-            
         }
         return returnTile;
     }

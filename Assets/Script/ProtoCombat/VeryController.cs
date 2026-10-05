@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(Rigidbody))]
-public class VeryController : MonoBehaviour
+public class VeryController : MonoBehaviour, IDamable
 {
     
     [SerializeField] private Rigidbody _rigidbody;
@@ -29,12 +29,14 @@ public class VeryController : MonoBehaviour
     [SerializeField] private Vector3 ForceScale = new Vector3(1, 0, 1);
     [SerializeField] private float GravityScaleDrop = 10f;
 
+    [SerializeField] private SoProjectileData _projectileData;
     [SerializeField] private Transform _pos1;
     [SerializeField] private Transform _pos2;
     [SerializeField] private float _bulletForce=50;
     [SerializeField] private Projectile _prfProjectile;
     [SerializeField] private float _fireRate=0.5f;
     [SerializeField] private float _recoilPower = 10;
+    [SerializeField] private Transform _transformGuide;
     
     private PopoteTimer _fireTimer;
     private bool _fireCanon1;
@@ -80,7 +82,7 @@ public class VeryController : MonoBehaviour
         if( _fireTimer.IsPlaying)return;
         if (_fireCanon1) {
             Projectile bullet =Instantiate(_prfProjectile,_pos1.position,_pos1.rotation);
-            bullet.Setup();
+            bullet.Setup(_projectileData);
             bullet.Rigidbody.AddForce(transform.forward * _bulletForce,ForceMode.Impulse);
             _rigidbody.AddForceAtPosition( -transform.forward*_recoilPower,_pos1.position,ForceMode.Impulse);
             _fireCanon1 = false;
@@ -90,7 +92,7 @@ public class VeryController : MonoBehaviour
         else
         {
             Projectile bullet =Instantiate(_prfProjectile,_pos2.position,_pos2.rotation);
-            bullet.Setup();
+            bullet.Setup(_projectileData);
             bullet.Rigidbody.AddForce(transform.forward * _bulletForce,ForceMode.Impulse );
             _rigidbody.AddForceAtPosition( -transform.forward*_recoilPower,_pos2.position,ForceMode.Impulse);
             _fireTimer.Play();
@@ -113,6 +115,7 @@ public class VeryController : MonoBehaviour
 
     private void Update() {
         ManagerMouvement();
+        UpdateGuideDirection();
         _fireTimer.UpdateTimer();
         if( _isFireInputDown) ManageFire();
     }
@@ -200,5 +203,13 @@ public class VeryController : MonoBehaviour
         Debug.Log("m_goalVel =    "+m_goalVel+"      _rigidbody vel"+ _rigidbody.linearVelocity.magnitude);
         neededAccel = Vector3.ClampMagnitude(neededAccel, maxAccel);
         _rigidbody.AddForce(Vector3.Scale(neededAccel*_rigidbody.mass, ForceScale));
+    }
+
+    public void TakeDamage(int damage) {
+        StaticData.ChangeHealth(-damage);
+    }
+
+    private void UpdateGuideDirection() {
+        _transformGuide.up = StaticData.EndLevelPosition -transform.position;
     }
 }

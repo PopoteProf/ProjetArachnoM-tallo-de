@@ -113,6 +113,8 @@ public static class ExtensionsMethodes
     }
 
     public static ReturnTile GetRandomTile(this List<ReturnTile> returnTiles) {
-        return returnTiles[Random.Range(0, returnTiles.Count)];
+        if( returnTiles == null) Debug.LogWarning("returnTiles is null");
+        if( returnTiles.Count == 0 )Debug.LogWarning("returnTiles.Count == 0");
+        return returnTiles[Random.Range(0, returnTiles.Count-1)];
     }
 }
