@@ -350,7 +350,7 @@ GameObject:
   - component: {fileID: 4470145380403187890}
   m_Layer: 7
   m_Name: PlayerController
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -567,8 +567,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   ForceScale: {x: 1, y: 0, z: 1}
-  GravityScaleDrop: 10
-  _projectileData: {fileID: 0}
+  _projectileData: {fileID: 11400000, guid: ae43f79e636d860438dbba98d159ab72, type: 2}
   _pos1: {fileID: 5717138944634401115}
   _pos2: {fileID: 1729542814318038708}
   _bulletForce: 30

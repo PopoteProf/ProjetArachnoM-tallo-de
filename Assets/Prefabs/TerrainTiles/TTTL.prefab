@@ -1681,7 +1681,3 @@ MonoBehaviour:
     Left: 1
     Top: 1
     Right: 2
-  _connexionTop: 0
-  _connexionRight: 1
-  _connexionBot: 1
-  _connexionLeft: 0

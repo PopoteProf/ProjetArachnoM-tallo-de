@@ -5,13 +5,13 @@ public class EnnemyRedCube : MonoBehaviour, IDamable {
     [SerializeField] private NavMeshAgent _agent;
     [SerializeField] private float _fireRange;
     [SerializeField] private Transform _playerTarget;
-    [SerializeField] private LayerMask _fireLayer;
+    //[SerializeField] private LayerMask _fireLayer;
     [SerializeField] private string _playerTag;
-    [SerializeField] private float _firerate = 2;
     [SerializeField] private int _health =4;
     [Header("Attack")] 
     [SerializeField] private Transform _firePoint;
     [SerializeField] private Projectile _prfProjectile;
+    [SerializeField] private float _firerate = 2;
     [SerializeField] private SoProjectileData _projectileData;
     [SerializeField] private float _bulletSpeed =25f;
     
@@ -30,7 +30,7 @@ public class EnnemyRedCube : MonoBehaviour, IDamable {
         if (Vector3.Distance(transform.position, _playerTarget.position) > _fireRange) return false;
         RaycastHit hit;
         if (Physics.Raycast(transform.position, _playerTarget.position - transform.position, out hit, _fireRange,
-                _fireLayer)) {
+                _projectileData.LayerMask)) {
             if (hit.collider.gameObject.CompareTag(_playerTag)) {
                 return true;
             }

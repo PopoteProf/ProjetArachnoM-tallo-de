@@ -4,10 +4,10 @@ using UnityEngine;
 public class TerrainTile : MonoBehaviour
 {
     [SerializeField] private TileConnectionData _connectionData;
-    [SerializeField]private TileConnectionData.ConnectionType _connexionTop;
-    [SerializeField]private TileConnectionData.ConnectionType _connexionRight;
-    [SerializeField]private TileConnectionData.ConnectionType _connexionBot;
-    [SerializeField]private TileConnectionData.ConnectionType _connexionLeft;
+    //[SerializeField]private TileConnectionData.ConnectionType _connexionTop;
+    //[SerializeField]private TileConnectionData.ConnectionType _connexionRight;
+    //[SerializeField]private TileConnectionData.ConnectionType _connexionBot;
+    //[SerializeField]private TileConnectionData.ConnectionType _connexionLeft;
 
     public TileConnectionData ConnectionData => _connectionData;
     public enum TileForme {

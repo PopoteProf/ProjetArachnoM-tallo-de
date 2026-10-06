@@ -27,7 +27,7 @@ public class VeryController : MonoBehaviour, IDamable
     [SerializeField] private float SlowDownFactor = 1.5f;
     [SerializeField] private AnimationCurve MaxAccelerationForceFactorFromDot =  AnimationCurve.Linear(0, 1, 1, 0);
     [SerializeField] private Vector3 ForceScale = new Vector3(1, 0, 1);
-    [SerializeField] private float GravityScaleDrop = 10f;
+    //[SerializeField] private float GravityScaleDrop = 10f;
 
     [SerializeField] private SoProjectileData _projectileData;
     [SerializeField] private Transform _pos1;
