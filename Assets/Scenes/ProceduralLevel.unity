@@ -347,6 +347,10 @@ PrefabInstance:
       propertyPath: _playerController
       value: 
       objectReference: {fileID: 1388771622}
+    - target: {fileID: 1416696839550077101, guid: 56f5186fcc3fcdb469b8ba7a48094e30, type: 3}
+      propertyPath: _soTilesCollection
+      value: 
+      objectReference: {fileID: 11400000, guid: 526c9d196e3eb844aa7366526ba29e06, type: 2}
     - target: {fileID: 1519461314135810074, guid: 56f5186fcc3fcdb469b8ba7a48094e30, type: 3}
       propertyPath: m_LocalPosition.x
       value: -11.45431
